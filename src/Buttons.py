@@ -13,6 +13,9 @@ class button():
         self.height = height
         self.x = None
         self.y = None
+        self.text_color = None
+        self.text_size = None
+        self.text_font_type = None
 
         
     """Este metodo retorna dibujo del boton en la posicion x, y dadas"""
@@ -31,12 +34,12 @@ class button():
                 #screen.blit()
                 
     """Metodo para añadir texto dentro del boton"""
-    def set_text(self, text, color, size, font_type):
+    def set_text(self, text):
 
-        font = pygame.font.Font(font_type, size)
-        ctext = font.render(text, 1, color)
-        self.screen.blit(ctext, (self.x+self.x/32, self.height/3+self.y))
-
+        font = pygame.font.Font(self.text_font_type, self.text_size)
+        ctext = font.render(text, 1, self.text_color)
+        #self.screen.blit(ctext, (self.x+self.x/32, self.height/3+self.y))
+        self.screen.blit(ctext, (self.x, self.y))
     """Metodo extra por si se quiere cambiar el tipo de evento, el default es cuando se presiona el click izq"""
     def set_event(self,event):
         self.event = event

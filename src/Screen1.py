@@ -1,10 +1,10 @@
 
 import pygame, sys
-import Iscreen, Buttons
+import Screen, Buttons
 from Var_global import *
 
 
-class Screen1(Iscreen.Iscreen):
+class Screen1(Screen.screen):
     
     def __init__(self):
         super().__init__()
@@ -18,24 +18,24 @@ class buttons1(Buttons.button):
         self.width = 170
         self.height = 50
         super().__init__(self.screen, self.color, self.width, self.height)
+        self.text_color = (255,255,255)
+        self.text_font_type = font_type
+        self.text_size = 35
        
 
 
-pygame.init()
 screen1 = Screen1()
-screen1.set_title()
-screen1.display_screen()
+screen1.display_init()
 
-font = pygame.font.Font(font_type, 58)
 
-text = font.render('Bienvenido a KSOLID', 1, (255,255,255))
+
 but_start = buttons1()
 but_start.shape(screen_width/2-but_start.width/2,screen_height/2-but_start.height/2)
-but_start.set_text('Jugar',(255,255,255), 35, font_type)
+but_start.set_text('Jugar')
 
 but_es = buttons1()
 but_es.shape(screen_width/2-but_start.width/2, screen_height*3/4-but_es.height/2)
-but_es.set_text('Como jugar',(255,255,255), 35, font_type)
+but_es.set_text('Como jugar')
 
 
 
@@ -43,7 +43,8 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-    screen1.screen.blit(text, (screen_width/3, screen_height/8))
+
+    screen1.set_title('Bienvenido a KSOLID')
     
     pygame.display.update()
 
