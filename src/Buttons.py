@@ -11,10 +11,14 @@ class button():
         self.color = color
         self.width = width
         self.height = height
+        self.x = None
+        self.y = None
 
         
     """Este metodo retorna dibujo del boton en la posicion x, y dadas"""
     def shape(self, x, y):
+        self.x = x
+        self.y = y
         pygame.draw.rect(self.screen, self.color , (x, y, self.width, self.height), 0, border_radius=15)
         
     """Este metodo, pensado para ser sobrecargado almacena lo que se desea que haga el boton cuando sea oprimido
@@ -31,7 +35,7 @@ class button():
 
         font = pygame.font.Font(font_type, size)
         ctext = font.render(text, 1, color)
-        self.screen.blit(ctext, ((2*self.x+self.width)/2, (2*self.y+self.height)/1.75))
+        self.screen.blit(ctext, (self.x+self.x/32, self.height/3+self.y))
 
     """Metodo extra por si se quiere cambiar el tipo de evento, el default es cuando se presiona el click izq"""
     def set_event(self,event):
