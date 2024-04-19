@@ -1,0 +1,65 @@
+@startuml Screen 
+class "Pantalla" as Pantalla
+
+Pantalla : tamaño
+Pantalla : titulo
+Pantalla : fondo
+Pantalla : Botones
+Pantalla : tipo_de_letra
+Pantalla : poner_fondo
+Pantalla : generar_pantalla()
+Pantalla : obtener_pantalla()
+Pantalla : mostrar_pantalla()
+Pantalla : poner_titulo(parametros: string)
+
+
+Botones : evento
+Botones : color
+Botones : ancho 
+Botones : largo 
+Botones : posicion_x
+Botones : posicion_y
+Botones : color_texto
+Botones : tamaño_texto
+Botones : letra_texto
+
+Botones : dibujar(parametros: int posicion_x, int posicion_y)
+Botones : evento_en_click()
+Botones : generar_texto(parametros: string)
+Botones : poner_evento(parametros: pygame_evento)
+
+class "Pantalla_inicio(parametro: pantalla_actual)" as cl1
+class "Pantalla_desarollo_del_juego(parametro: pantalla_actual)" as cl2
+class "Pantalla_fin_del_juego(parametro: pantalla_actual)" as cl3
+
+Principal <|-- cl1
+Principal <|-- cl2
+Principal <|-- cl3
+
+cl1 : Botones_inicio 
+cl2 : Botones_desarollo_del_juego
+cl3 : Botones_fin_del_juego 
+
+Pantalla o-- Botones 
+
+class "Gestor de pantallas" as gp 
+
+gp : obtener_pantalla_actual()
+gp : poner_pantalla_actual(parametro: pantallas[i])
+gp : pantallas[] 
+cl1 *-- gp 
+cl2 *-- gp
+cl3 *-- gp 
+
+class "Pantalla_principal" as Principal
+gp *-- "Recibe retorno de obtener_pantalla_actual() como pantalla_actual" Principal 
+
+
+Principal : mostrar_pantalla(parametro: pantalla_actual)
+Pantalla <|-- Principal
+
+note "obtener_pantalla_actual() retorna instancia de Pantalla" as N1
+note "Agrega como elemento de la lista pantallas todas las clases hijas de Principal" as N2
+gp .. N1
+gp .. N2
+@enduml
