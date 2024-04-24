@@ -25,8 +25,9 @@ class buttons1(Buttons.button):
 
 
 screen1 = Screen1()
+screen1.set_current_screen(screen1)
 screen1.display_init()
-
+screen1.set_title('Bienvenido a KSOLID')
 
 
 but_start = buttons1()
@@ -44,7 +45,7 @@ while 1:
         if event.type == pygame.QUIT:
             sys.exit()
 
-    screen1.set_title('Bienvenido a KSOLID')
+    
     
     pygame.display.update()
 

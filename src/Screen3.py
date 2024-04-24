@@ -20,6 +20,7 @@ class buttons3(Buttons.button):
 
 screen3 = Screen3()
 screen3.display_init()
+screen3.screen.fill('white')
 
 while 1:
     for event in pygame.event.get():

@@ -33,8 +33,8 @@ label_elements = screen2.font.render('Elementos', 1, font_color_title)
 
 but_add_element = buttons2()
 but_add_element.text_size = 50
-but_add_element.width = 20
-but_add_element.height = 20
+but_add_element.width = 40
+but_add_element.height = 40
 but_add_element.shape(screen_width/2,screen_height/4)
 but_add_element.set_text('+')
 

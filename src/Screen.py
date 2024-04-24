@@ -7,6 +7,7 @@ class screen() :
 
     
     def __init__(self):
+        self.current_screen = None       
         self.size = self.width, self.height = Var_global.screen_width, Var_global.screen_height
         self.caption = "KSOLID Game"
         self._image = None
@@ -15,6 +16,8 @@ class screen() :
         self.screen = None
         self.font = pygame.font.Font(Var_global.font_type, Var_global.font_size_title)
 
+    def set_current_screen(self, current_screen):
+        self.current_screen = current_screen
     
     def set_caption(self):
         pygame.display.set_caption(self.caption)

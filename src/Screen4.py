@@ -20,6 +20,7 @@ class buttons4(Buttons.button):
 
 screen4 = Screen4()
 screen4.display_init()
+screen4.screen.fill('red')
 
 while 1:
     for event in pygame.event.get():
