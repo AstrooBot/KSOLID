@@ -16,22 +16,22 @@ class button():
         self.text_color = None
         self.text_size = None
         self.text_font_type = None
+        self.form = None
+        self.rect = None
 
         
     """Este metodo retorna dibujo del boton en la posicion x, y dadas"""
     def shape(self, x, y):
         self.x = x
         self.y = y
-        pygame.draw.rect(self.screen, self.color , (x, y, self.width, self.height), 0, border_radius=15)
+        self.form = pygame.draw.rect(self.screen, self.color , (x, y, self.width, self.height), 0, border_radius=15)
+        self.rect = pygame.rect.Rect(self.form)
         
     """Este metodo, pensado para ser sobrecargado almacena lo que se desea que haga el boton cuando sea oprimido
        Para que el metodo funcione se debe agregar la siguiete linea al for que detecta los eventos:
                 if event.type == button.event """    
 
-    def on_click(self):
-                self.event = pygame.MOUSEBUTTONDOWN
-                self.screen.fill('black')
-                #screen.blit()
+
                 
     """Metodo para añadir texto dentro del boton"""
     def set_text(self, text):
@@ -43,3 +43,18 @@ class button():
     """Metodo extra por si se quiere cambiar el tipo de evento, el default es cuando se presiona el click izq"""
     def set_event(self,event):
         self.event = event
+    
+
+    def isClicked(self, event_list):
+        check = False
+        for event in event_list:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+
+                if self.rect.collidepoint(event.pos):
+                    check = True
+        return check
+"""Este método retorna un booleano cuando el boton en cuestion es presionado con el click izq. Si fue presionado retorna True sino retorna False
+   event_list surge de pygame.event.get() y es donde se almacena todos los eventos que detecta pygame, de este se pregunta si se clickeo y si
+   fue asi, se pregunta si la posicion en la que se clickeo es la misma al rect del boton en cuestion.
+   event_list proviene de la instancia de clase en la que se este trabajando """
+    
