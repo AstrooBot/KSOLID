@@ -1,6 +1,10 @@
 screen_width = 1280
 screen_height = 720
-button_color = (0,255,26)
+button_color = (0,255,255)
 font_type = None
 font_size_title = 58
 font_color_title = (255,255,255)
+box_neutral = (75, 255, 50)
+box_fire = (254, 90, 30)
+box_water = (1, 255, 244)
+box_speed = (255, 242, 75)
