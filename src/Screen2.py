@@ -1,9 +1,5 @@
 import pygame, Buttons, Var_global , Iscreen
 
-
-
-
-
 class screen2(Iscreen.screen): 
     def __init__(self,screen):
         super().__init__(screen)

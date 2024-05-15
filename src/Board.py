@@ -21,16 +21,31 @@ class board:
     
     def generate_percentage_boxes(self, percentage_min, percentage_max):
         return int((random.randint(percentage_min - 1, percentage_max + 1)/100)*len(self.box_list_work))
+    
+    def clean_list(self,list):
+        for i in range(len(list)):
+            list.pop()
+    
+    def clean_board(self):
+        self.clean_list(self.box_list)
+        self.clean_list(self.box_list_work)
+        self.clean_list(self.fire_boxes)
+        self.clean_list(self.water_boxes)
+        self.clean_list(self.speed_boxes)
+        self.clean_list(self.special_boxes)
+      
+    
        
     def set_board(self, columnas, filas):
+        self.clean_board()
 
         for j in range(0,filas):
 
             for i in range(0, columnas):
 
                 box = Box(self.screen)
-                box.x = 50+(i*1.5)+(i*70)
-                box.y = 100+(j*1.5)+(j*70)
+                box.x = Var_global.boxes_started_x+(i*Var_global.boxes_gap)+(i*Var_global.boxes_size)
+                box.y = Var_global.boxes_started_y+(j*Var_global.boxes_gap)+(j*Var_global.boxes_size)
                 self.box_list.append(box)
 
         self.box_list_work = self.box_list[1 : len(self.box_list) - 2]              
@@ -44,8 +59,9 @@ class board:
 
         self.speed_boxes = self.box_list_work[ len(self.special_boxes) : len(self.special_boxes) + self.generate_percentage_boxes(2, 15)]
         self.set_type_loza(self.speed_boxes, Var_global.box_speed) 
-
+        
         self.shape_board()
+        
 
 class Box(Buttons.button):
 
@@ -56,19 +72,3 @@ class Box(Buttons.button):
         self.height = self.width
         super().__init__(self.screen, self.color, self.width, self.height)
 
-"""
-def main():
-        screen = pygame.display.set_mode(size=(1280, 720))
-        pygame.init()
-        board = board(screen)
-        board.set_board(11,8)
-        while 1:
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            pygame.display.update()
-
-if __name__ == '__main__':
-    main()
-"""

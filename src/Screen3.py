@@ -1,6 +1,5 @@
 import pygame, Buttons, Var_global , Iscreen, Board
 
-
 class screen3(Iscreen.screen): 
     def __init__(self,screen):
         self.board = Board.board(screen)
@@ -15,11 +14,6 @@ class screen3(Iscreen.screen):
         but_map.set_text('Mapa')
         but_map = self.isHappening(but_map.isClicked(event_list), 'but_map_event')
         self.expected_events.append(but_map)
-
-
-       
-        
-        
 
 class buttons3(Buttons.button):
 

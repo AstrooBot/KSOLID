@@ -27,7 +27,9 @@ class screen_mangament:
         para esto toma la lista de expected_events de la pantalla actual y segun el nombre hace la accion esperable"""
         for i in self.current_Screen.expected_events:
             if i == 'but_start_event':
-                self.set_current_screen(2) 
+                self.set_current_screen(3)
+            if i == 'but_map_event' :
+                self.current_Screen.board.set_board(11,8)
               
         
 
