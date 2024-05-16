@@ -30,6 +30,8 @@ class screen_mangament:
                 self.set_current_screen(3)
             if i == 'but_map_event' :
                 self.current_Screen.board.set_board(11,8)
+                self.current_Screen.player.rect.centerx = 50 + 35
+                self.current_Screen.player.rect.centery = 100 + 35
               
         
 
