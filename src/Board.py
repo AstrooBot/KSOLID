@@ -61,6 +61,9 @@ class board:
         self.set_type_loza(self.speed_boxes, Var_global.box_speed) 
         
         self.shape_board()
+
+    def get_box(self, index):
+        return self.box_list[index]
         
 
 class Box(Buttons.button):

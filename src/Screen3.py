@@ -1,19 +1,22 @@
-import pygame, Buttons, Var_global , Iscreen, Board
+import pygame, Buttons, Var_global , Iscreen, Board, Player
 
 class screen3(Iscreen.screen): 
     def __init__(self,screen):
         self.board = Board.board(screen)
         self.board.set_board(11,8)
+        self.player = Player.player(screen, self.board)
         super().__init__(screen)
 
     def display(self, event_list):    
         self.reset_events()
         self.board.shape_board()
+        self.screen.blit(self.player.imagen, self.player.rect)
         but_map = buttons3(self.screen)
         but_map.shape(1100, Var_global.screen_height/2)
         but_map.set_text('Mapa')
         but_map = self.isHappening(but_map.isClicked(event_list), 'but_map_event')
         self.expected_events.append(but_map)
+        
 
 class buttons3(Buttons.button):
 

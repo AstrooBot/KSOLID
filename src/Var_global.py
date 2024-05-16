@@ -10,5 +10,5 @@ box_water = (1, 255, 244)
 box_speed = (255, 242, 75)
 boxes_started_x = 50
 boxes_started_y = 100
-boxes_gap = 1.5
+boxes_gap = 2
 boxes_size = 70
