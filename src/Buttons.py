@@ -24,7 +24,7 @@ class button():
     def shape(self, x, y):
         self.x = x
         self.y = y
-        self.form = pygame.draw.rect(self.screen, self.color , (x, y, self.width, self.height), 0, border_radius=15)
+        self.form = pygame.draw.rect(self.screen, self.color , (self.x, self.y, self.width, self.height), 0, border_radius=15)
         self.rect = pygame.rect.Rect(self.form)
         
     """Este metodo, pensado para ser sobrecargado almacena lo que se desea que haga el boton cuando sea oprimido

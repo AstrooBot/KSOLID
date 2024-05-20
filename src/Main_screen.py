@@ -18,7 +18,7 @@ class main_screen:
 
           self.screens = [Screen1.screen1(self.surface), Screen2.screen2(self.surface), Screen3.screen3(self.surface)]
           self.gestor.set_screens(self.screens)
-          self.gestor.set_current_screen(1)
+          self.gestor.set_current_screen(3)
         
      def update(self, event_list):
          
