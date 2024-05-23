@@ -32,21 +32,29 @@ class screen_mangament:
                 self.current_Screen.board.set_board(11,8)
                 self.current_Screen.player.rect.centerx = 50 + 35
                 self.current_Screen.player.rect.centery = 100 + 35
+                self.current_Screen.flag.set_object(809, 639)
             
             if i == 'but_water_object_event':
-                self.current_Screen.player.set_image('kirby_water.png')
+                if self.current_Screen.player.image_addr == 'kirby_fast.png' or self.current_Screen.player.image_addr == 'kirby_fire_fast.png':
+                    self.current_Screen.player.set_image('kirby_water&fast.png')
+                else: 
+                    self.current_Screen.player.set_image('kirby_water.png')
                 self.current_Screen.water_counter += 1
+
             if i == 'but_fire_object_event':
-                self.current_Screen.player.set_image('kirby_fire.png')
+                if self.current_Screen.player.image_addr == 'kirby_fast.png' or self.current_Screen.player.image_addr == 'kirby_water&fast.png':
+                    self.current_Screen.player.set_image('kirby_fire_fast.png')
+                else: 
+                    self.current_Screen.player.set_image('kirby_fire.png')
                 self.current_Screen.fire_counter += 1
                 
-            if self.current_Screen.player.rect.x + 10 == self.current_Screen.flag.rect.x:
-                self.current_Screen.flag.image.fill((0,0,0,0))
+            if self.current_Screen.player.rect.x + 10 == self.current_Screen.flag.rect.x and self.current_Screen.player.rect.y + 6 == self.current_Screen.flag.rect.y:
+                
                 game_over_menu = Buttons.button(self.current_Screen.screen, (153,170,187), 1000, 400)
                 game_over_menu.shape(140,160)
                 font = pygame.font.Font(None, 70)
                 self.current_Screen.screen.blit(font.render('Fin del juego', 1, 'white'), (430, 190))
-        
+               
 
 
   

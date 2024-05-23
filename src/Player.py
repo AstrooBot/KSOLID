@@ -24,58 +24,66 @@ class player(Sprite):
           
           if keys [K_w] and not 'up' in self.track_limits():
                self.rect.y -= self.len_move
-               if not 'up' in self.track_limits():
-                    if self.can_pass() == False:
+        
+               if self.can_pass() == False:
                          self.rect.y += self.len_move
                          self.len_move = 72
                          self.set_image('sprite.png')
-                      
-                    
+               else: 
+                     self.is_power_up()
+            
           if keys [K_s] and not 'down' in self.track_limits():
-               self.rect.y += self.len_move 
-               if not 'down' in self.track_limits():
-                    if self.can_pass() == False:
-                         self.rect.y -= self.len_move
-                         self.len_move = 72 
-                         self.set_image('sprite.png')
-                         
+               self.rect.y += self.len_move
+             
+               if self.can_pass() == False:
+                              self.rect.y -= self.len_move
+                              self.len_move = 72 
+                              self.set_image('sprite.png')
+               else: 
+                         self.is_power_up()
 
           if keys [K_a] and not 'left' in self.track_limits():
                self.rect.x -= self.len_move
-               if not 'left' in self.track_limits():
-                    if self.can_pass() == False:
-                         self.rect.x += self.len_move
-                         self.len_move = 72  
-                         self.set_image('sprite.png')
-                     
+               if self.can_pass() == False:
+                              self.rect.x += self.len_move
+                              self.len_move = 72  
+                              self.set_image('sprite.png')
+               else: 
+                         self.is_power_up()
 
           if keys [K_d] and not 'right' in self.track_limits():
                self.rect.x += self.len_move
-               if not 'right' in self.track_limits():
-                    if self.can_pass() == False:
-                         self.rect.x -= self.len_move
-                         self.len_move = 72  
-                         self.set_image('sprite.png')
-                     
+               if self.can_pass() == False:
+                              self.rect.x -= self.len_move
+                              self.len_move = 72  
+                              self.set_image('sprite.png')
+               else: 
+                         self.is_power_up()
+
           if keys [K_o]:
-               #print(self.len_move)
+               print(self.len_move)
+               print(self.rect.y)
                #for i in self.track_limits(): 
                     #print(i)
+               #print(self.track_limits())     
                #print(self.rect.x, self.rect.y)
+               print(self.get_current_box())
                #print(self.get_current_box())     
                #print(self.rect.centerx, self.rect.centery)
                #print(self.get_current_box().color)
-               print(self.imagen)
-     
+               #print(self.imagen)
+               #print(self.image_addr)
+               #print(self.can_pass())
+             
     def track_limits(self):
          check = []
-         if self.rect.x - 5 == 50: 
+         if self.rect.x - 5 <= 50 or self.rect.y - 5 + self.len_move  - 72 <= 50: 
               check.append('left')
-         if self.rect.x + 60 + 5 == 840: 
+         if self.rect.x + 60 + 5 >= 840 or self.rect.y + 65 + self.len_move - 72 >= 840 : 
                check.append('right')
-         if self.rect.y - 5 == 100:
+         if self.rect.y - 5 <= 100 :
               check.append('up')
-         if self.rect.y + 60 + 5 == 674:
+         if self.rect.y + 60 + 5 >= 674 or self.rect.y + 65 + self.len_move  - 72 >= 674 :
               check.append('down')
          return check
     
@@ -83,39 +91,60 @@ class player(Sprite):
          current_box = None
          for i in self.board.box_list:
               if i.x == self.rect.x - 5 and i.y == self.rect.y - 5:
-                  current_box = i 
+                  current_box = i
          return current_box
     
     def can_pass(self): 
          check = True
          if self.get_current_box() == None:
-              check = False
-              print('I cannot go any futher')
+                   check = False
+                   print('I cannot go any futher')
+         else:                 
+            match self.get_current_box().color:
               
-         elif self.get_current_box().color == Var_global.box_fire and self.image_addr != 'kirby_fire.png':
-              check = False
-              print('I cannot pass, there is fire')
+              case Var_global.box_fire:
+                   
+                    if self.image_addr != 'kirby_fire.png' and self.image_addr != 'kirby_fire_fast.png':
+                         check = False
+                         print('I cannot pass, there is fire')
 
-         elif self.get_current_box().color == Var_global.box_water and self.image_addr != 'kirby_water.png':
-              check = False
-              print('I cannot pass, there is water')
+              case Var_global.box_water:
+                    
+                    if self.image_addr != 'kirby_water.png' and self.image_addr != 'kirby_water&fast.png':
+                         check = False
+                         print('I cannot pass, there is water')
 
-         elif self.get_current_box().color == Var_global.box_speed:
-              print('Now I am fast')
-              self.len_move *= 2 
-              self.set_image('kirby_fast.png')
-
-         elif self.get_current_box().color == Var_global.box_neutral:
-              self.set_image('sprite.png')
-              print('yeah, I touch some grass :D')
+              case Var_global.box_speed:
+                         check = True
+     
+              case Var_global.box_neutral:
+                         check = True
+                         if self.len_move > 72: 
+                               self.set_image('kirby_fast.png')
+                         else:
+                               self.set_image('sprite.png')
+              case _ : 
+                   check = False
          
          return check
+    
+    def is_power_up(self):
+          if self.get_current_box() != None:
+               match self.get_current_box().color:
+                         
+                    case Var_global.box_speed:
+     
+                                   print('Now I am fast')
+                                   self.len_move += 72
+                                   self.set_image('kirby_fast.png')
 
-
-         
-          
-
-
+                    case Var_global.box_neutral:
+                                   
+                                   if self.len_move > 72: 
+                                        self.set_image('kirby_fast.png')
+                                   else:
+                                        self.set_image('sprite.png')
+                    
 def main():
     screen = pygame.display.set_mode(size=(1280,720))
     voard = Board.board(screen)

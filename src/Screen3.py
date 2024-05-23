@@ -45,6 +45,7 @@ class screen3(Iscreen.screen):
         self.expected_events.append(but_water_object_event)
         self.expected_events.append(but_fire_object_event)
         
+        
 
         
 
