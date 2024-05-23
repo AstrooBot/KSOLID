@@ -6,37 +6,66 @@ class player(Sprite):
     def __init__(self, screen, board):
          self.contenedor = screen
          self.board = board
-         self.imagen = pygame.image.load('sprite.png')
+         self.image_addr = 'sprite.png'
+         self.imagen = pygame.image.load(self.image_addr)
          self.rect = self.imagen.get_rect()
          self.rect.centerx = 50 + 35
          self.rect.centery = 100 + 35
+         self.len_move = 72
          super().__init__()
+    
+    def set_image(self, image_addr):
+         self.image_addr = image_addr
+         self.imagen = pygame.image.load(self.image_addr)
 
     def update(self):
           
           keys = pygame.key.get_pressed()
-
+          
           if keys [K_w] and not 'up' in self.track_limits():
-               self.rect.y -= 72
-               if self.can_pass() == False:
-                    self.rect.y += 72
-
+               self.rect.y -= self.len_move
+               if not 'up' in self.track_limits():
+                    if self.can_pass() == False:
+                         self.rect.y += self.len_move
+                         self.len_move = 72
+                         self.set_image('sprite.png')
+                      
+                    
           if keys [K_s] and not 'down' in self.track_limits():
-               self.rect.y += 72
-               if self.can_pass() == False:
-                    self.rect.y -= 72
+               self.rect.y += self.len_move 
+               if not 'down' in self.track_limits():
+                    if self.can_pass() == False:
+                         self.rect.y -= self.len_move
+                         self.len_move = 72 
+                         self.set_image('sprite.png')
+                         
 
           if keys [K_a] and not 'left' in self.track_limits():
-               self.rect.x -= 72 
-               if self.can_pass() == False:
-                    self.rect.x += 72
+               self.rect.x -= self.len_move
+               if not 'left' in self.track_limits():
+                    if self.can_pass() == False:
+                         self.rect.x += self.len_move
+                         self.len_move = 72  
+                         self.set_image('sprite.png')
+                     
 
           if keys [K_d] and not 'right' in self.track_limits():
-               self.rect.x += 72
-               if self.can_pass() == False:
-                    self.rect.x -= 72
+               self.rect.x += self.len_move
+               if not 'right' in self.track_limits():
+                    if self.can_pass() == False:
+                         self.rect.x -= self.len_move
+                         self.len_move = 72  
+                         self.set_image('sprite.png')
+                     
           if keys [K_o]:
-               print(self.get_current_box().color)
+               #print(self.len_move)
+               #for i in self.track_limits(): 
+                    #print(i)
+               #print(self.rect.x, self.rect.y)
+               #print(self.get_current_box())     
+               #print(self.rect.centerx, self.rect.centery)
+               #print(self.get_current_box().color)
+               print(self.imagen)
      
     def track_limits(self):
          check = []
@@ -57,23 +86,31 @@ class player(Sprite):
                   current_box = i 
          return current_box
     
-    def can_pass(self):
+    def can_pass(self): 
          check = True
-         if self.get_current_box().color == Var_global.box_fire:
+         if self.get_current_box() == None:
+              check = False
+              print('I cannot go any futher')
+              
+         elif self.get_current_box().color == Var_global.box_fire and self.image_addr != 'kirby_fire.png':
               check = False
               print('I cannot pass, there is fire')
 
-         if self.get_current_box().color == Var_global.box_water:
+         elif self.get_current_box().color == Var_global.box_water and self.image_addr != 'kirby_water.png':
               check = False
               print('I cannot pass, there is water')
 
-         if self.get_current_box().color == Var_global.box_speed:
+         elif self.get_current_box().color == Var_global.box_speed:
               print('Now I am fast')
+              self.len_move *= 2 
+              self.set_image('kirby_fast.png')
 
-         if self.get_current_box().color == Var_global.box_neutral:
+         elif self.get_current_box().color == Var_global.box_neutral:
+              self.set_image('sprite.png')
               print('yeah, I touch some grass :D')
+         
          return check
-   
+
 
          
           
