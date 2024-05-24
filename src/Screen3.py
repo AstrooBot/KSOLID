@@ -10,6 +10,39 @@ class screen3(Iscreen.screen):
         self.water_counter = 0
         self.fire_counter = 0
         super().__init__(screen)
+    
+    def but_action(self):
+        channel = 3
+        for i in self.expected_events:
+
+            if i == 'but_map_event':
+                self.board.set_board(11,8)
+                self.player.rect.centerx = 50 + 35
+                self.player.rect.centery = 100 + 35
+                self.flag.set_object(809, 639)
+            
+            if i == 'but_water_object_event':
+                if self.player.image_addr == 'kirby_fast.png' or self.player.image_addr == 'kirby_fire_fast.png':
+                    self.player.set_image('kirby_water&fast.png')
+                else: 
+                    self.player.set_image('kirby_water.png')
+                self.water_counter += 1
+
+            if i == 'but_fire_object_event' :
+                if self.player.image_addr == 'kirby_fast.png' or self.player.image_addr == 'kirby_water&fast.png':
+                    self.player.set_image('kirby_fire_fast.png')
+                else: 
+                    self.player.set_image('kirby_fire.png')
+                self.fire_counter += 1
+                
+            if self.player.rect.x + 10 == self.flag.rect.x and self.player.rect.y + 6 == self.flag.rect.y:
+                
+                game_over_menu = Buttons.button(self.screen, (153,170,187), 1000, 400)
+                game_over_menu.shape(140,160)
+                font = pygame.font.Font(None, 70)
+                self.screen.blit(font.render('Fin del juego', 1, 'white'), (430, 190))
+        return channel
+               
 
     def display(self, event_list):    
         self.reset_events()
