@@ -47,10 +47,9 @@ class button():
 
     def isClicked(self, event_list):
         check = False
-        for event in event_list:
-            if event.type == pygame.MOUSEBUTTONDOWN:
+        if event_list.type == pygame.MOUSEBUTTONDOWN:
 
-                if self.rect.collidepoint(event.pos):
+                if self.rect.collidepoint(event_list.pos):
                     check = True
         return check
 """Este método retorna un booleano cuando el boton en cuestion es presionado con el click izq. Si fue presionado retorna True sino retorna False

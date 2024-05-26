@@ -4,6 +4,7 @@ from pygame.sprite import  Sprite
 
 class player(Sprite):
     def __init__(self, screen, board):
+         
          self.contenedor = screen
          self.board = board
          self.image_addr = 'sprite.png'
@@ -12,53 +13,70 @@ class player(Sprite):
          self.rect.centerx = 50 + 35
          self.rect.centery = 100 + 35
          self.len_move = 72
+         self.amount_move = 0
+         self.box_moved = 0
          super().__init__()
     
     def set_image(self, image_addr):
          self.image_addr = image_addr
          self.imagen = pygame.image.load(self.image_addr)
 
-    def update(self):
-          
+    def update(self, event_list):
+
+        if event_list.type == pygame.KEYDOWN:
           keys = pygame.key.get_pressed()
-          
+     
           if keys [K_w] and not 'up' in self.track_limits():
+  
                self.rect.y -= self.len_move
         
                if self.can_pass() == False:
                          self.rect.y += self.len_move
                          self.len_move = 72
                          self.set_image('sprite.png')
+                         self.amount_move = 0
                else: 
                      self.is_power_up()
+                     self.amount_move = 1
+
             
           if keys [K_s] and not 'down' in self.track_limits():
                self.rect.y += self.len_move
-             
+ 
                if self.can_pass() == False:
                               self.rect.y -= self.len_move
                               self.len_move = 72 
                               self.set_image('sprite.png')
+                              self.amount_move = 0
                else: 
                          self.is_power_up()
+                         self.amount_move = 1
 
           if keys [K_a] and not 'left' in self.track_limits():
                self.rect.x -= self.len_move
+
                if self.can_pass() == False:
                               self.rect.x += self.len_move
-                              self.len_move = 72  
+                              self.len_move += 72  
                               self.set_image('sprite.png')
+                              self.amount_move = 0
                else: 
                          self.is_power_up()
+                         self.amount_move = 1
 
           if keys [K_d] and not 'right' in self.track_limits():
                self.rect.x += self.len_move
+               
                if self.can_pass() == False:
                               self.rect.x -= self.len_move
                               self.len_move = 72  
                               self.set_image('sprite.png')
+                              self.amount_move = 0
                else: 
                          self.is_power_up()
+                         self.amount_move = 1
+          self.box_moved = self.amount_move * Var_global.box_neutral_score_normal
+
 
           if keys [K_o]:
                print(self.len_move)
@@ -74,6 +92,7 @@ class player(Sprite):
                #print(self.imagen)
                #print(self.image_addr)
                #print(self.can_pass())
+               print(self.box_moved)
              
     def track_limits(self):
          check = []
@@ -138,12 +157,14 @@ class player(Sprite):
                                    self.len_move += 72
                                    self.set_image('kirby_fast.png')
 
+
                     case Var_global.box_neutral:
-                                   
+
                                    if self.len_move > 72: 
                                         self.set_image('kirby_fast.png')
                                    else:
                                         self.set_image('sprite.png')
+                                   
                     
 def main():
     screen = pygame.display.set_mode(size=(1280,720))

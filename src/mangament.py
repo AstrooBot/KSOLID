@@ -25,10 +25,14 @@ class screen_mangament:
     
     def update(self, event_list):   
         pygame.display.set_caption(self.current_Screen.caption)
+        self.set_current_screen(self.current_Screen.but_action())
         self.current_Screen.display(event_list)
         """Despues de dibujar todo lo que exige la pantalla, el gestor de pantallas verifica que eventos deben haber
         para esto toma la lista de expected_events de la pantalla actual y segun el nombre hace la accion esperable"""
-        self.set_current_screen(self.current_Screen.but_action())
+
+
+    
+
      
         
 

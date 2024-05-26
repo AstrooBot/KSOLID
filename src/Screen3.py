@@ -1,4 +1,4 @@
-import pygame, Buttons, Var_global , Iscreen, Board, Player, Objects
+import pygame, Buttons, Var_global , Iscreen, Board, Player, Objects, Score
 
 class screen3(Iscreen.screen): 
     def __init__(self,screen):
@@ -9,41 +9,10 @@ class screen3(Iscreen.screen):
         self.flag.set_object(809, 639)
         self.water_counter = 0
         self.fire_counter = 0
+        self.score_count = Var_global.initial_score
+
         super().__init__(screen)
     
-    def but_action(self):
-        channel = 3
-        for i in self.expected_events:
-
-            if i == 'but_map_event':
-                self.board.set_board(11,8)
-                self.player.rect.centerx = 50 + 35
-                self.player.rect.centery = 100 + 35
-                self.flag.set_object(809, 639)
-            
-            if i == 'but_water_object_event':
-                if self.player.image_addr == 'kirby_fast.png' or self.player.image_addr == 'kirby_fire_fast.png':
-                    self.player.set_image('kirby_water&fast.png')
-                else: 
-                    self.player.set_image('kirby_water.png')
-                self.water_counter += 1
-
-            if i == 'but_fire_object_event' :
-                if self.player.image_addr == 'kirby_fast.png' or self.player.image_addr == 'kirby_water&fast.png':
-                    self.player.set_image('kirby_fire_fast.png')
-                else: 
-                    self.player.set_image('kirby_fire.png')
-                self.fire_counter += 1
-                
-            if self.player.rect.x + 10 == self.flag.rect.x and self.player.rect.y + 6 == self.flag.rect.y:
-                
-                game_over_menu = Buttons.button(self.screen, (153,170,187), 1000, 400)
-                game_over_menu.shape(140,160)
-                font = pygame.font.Font(None, 70)
-                self.screen.blit(font.render('Fin del juego', 1, 'white'), (430, 190))
-        return channel
-               
-
     def display(self, event_list):    
         self.reset_events()
         self.board.shape_board()
@@ -74,16 +43,56 @@ class screen3(Iscreen.screen):
         but_fire_counter.shape(880, 530)
         but_fire_counter.set_text(str(self.fire_counter))
 
+        score_counter = Score.score(self.screen, self.score_count)
+        score_counter.set_counter(250, 20)
+
+
         self.expected_events.append(but_map_event)
         self.expected_events.append(but_water_object_event)
         self.expected_events.append(but_fire_object_event)
-        
-        
 
-        
 
-        
+        self.player.update(event_list)
 
+        self.score_count = score_counter.update(event_list,self.player.box_moved)
+
+    def but_action(self):
+        channel = 3
+        for i in self.expected_events:
+
+            if i == 'but_map_event':
+                self.board.set_board(11,8)
+                self.player.rect.centerx = 50 + 35
+                self.player.rect.centery = 100 + 35
+                self.flag.set_object(809, 639)
+                self.score_count = Var_global.initial_score
+                self.player.set_image('sprite.png')
+            
+            if i == 'but_water_object_event':
+                if self.player.image_addr == 'kirby_fast.png' or self.player.image_addr == 'kirby_fire_fast.png':
+                    self.player.set_image('kirby_water&fast.png')
+                else: 
+                    self.player.set_image('kirby_water.png')
+                self.water_counter += 1
+                self.score_count -= Var_global.box_special_score_normal
+
+            if i == 'but_fire_object_event' :
+                if self.player.image_addr == 'kirby_fast.png' or self.player.image_addr == 'kirby_water&fast.png':
+                    self.player.set_image('kirby_fire_fast.png')
+                else: 
+                    self.player.set_image('kirby_fire.png')
+                self.fire_counter += 1
+                self.score_count -= Var_global.box_special_score_normal
+
+            if self.player.rect.x + 10 == self.flag.rect.x and self.player.rect.y + 6 == self.flag.rect.y:
+                self.screen.fill('black')
+                game_over_menu = Buttons.button(self.screen, (153,170,187), 1000, 400)
+                game_over_menu.shape(140,160)
+                font = pygame.font.Font(None, 70)
+                self.screen.blit(font.render('Fin del juego', 1, 'white'), (430, 190))
+
+        return channel
+        
 class buttons3(Buttons.button):
 
     def __init__(self, screen, width, height):

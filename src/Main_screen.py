@@ -34,15 +34,14 @@ class main_screen:
 
      def running(self):
         pygame.init()
+ 
         while 1:
             event_list = pygame.event.get()
             for event in event_list:
+                self.update(event)
                 if event.type == pygame.QUIT:
                     sys.exit()
-                if event.type == pygame.KEYDOWN:
-                    self.gestor.current_Screen.player.update()
-            self.update(event_list)
-            
+
             pygame.display.update()
 
 def main():
