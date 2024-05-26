@@ -13,7 +13,7 @@ class screen :
         self.screen = screen
         self.font = pygame.font.Font(Var_global.font_type, Var_global.font_size_title)
         self.expected_events = []
-
+        self.data = None
     
     def set_caption(self):
         pygame.display.set_caption(self.caption)
@@ -46,3 +46,8 @@ class screen :
     def but_action(self):
         return 0
     
+    def set_data(self,data):
+        self.data = data
+    
+    def get_data(self):
+        return self.data

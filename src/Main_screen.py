@@ -1,4 +1,4 @@
-import pygame, sys, mangament, Var_global, Screen1, Screen2, Screen3
+import pygame, sys, mangament, Var_global, Screen1, Screen3, Screen4
 
 """La siguiente clase almacena la superficie en la que se trabajara todas las pantallas. Es como si main_screen fuera una hoja en blanco
 y cada pantalla, una impresion que puede ponerse sobre la hoja. Cada pantalla trabaja sobre las medidas globales pero todas sus solicitudes se
@@ -16,7 +16,7 @@ class main_screen:
           """Screens es una lista que almacena instancias de cada una de las pantallas. como si hiciera las impresiones de todas las pantallas en
           la hoja"""
 
-          self.screens = [Screen1.screen1(self.surface), Screen2.screen2(self.surface), Screen3.screen3(self.surface)]
+          self.screens = [Screen1.screen1(self.surface), Screen3.screen3(self.surface), Screen4.screen4(self.surface)]
           self.gestor.set_screens(self.screens)
           self.gestor.set_current_screen(1)
         

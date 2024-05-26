@@ -3,12 +3,14 @@ import pygame, Buttons, Var_global , Iscreen
 class screen1(Iscreen.screen): 
     def __init__(self,screen):
         super().__init__(screen)
+
     
     def but_action(self):
         channel = 0
         for i in self.expected_events:
             if i == 'but_start_event':
-                channel = 3
+                channel = 2
+                print(self.data)
         return channel
 
 
