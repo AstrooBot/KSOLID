@@ -38,8 +38,12 @@ class button():
 
         font = pygame.font.Font(self.text_font_type, self.text_size)
         ctext = font.render(text, 1, self.text_color)
+        ctext_rect = ctext.get_rect()
+        ctext_rect.centerx = self.rect.centerx
+        ctext_rect.centery = self.rect.centery
         #self.screen.blit(ctext, (self.x+self.x/32, self.height/3+self.y))
-        self.screen.blit(ctext, (self.x, self.y))
+        self.screen.blit(ctext, (ctext_rect.x, ctext_rect.y))
+
     """Metodo extra por si se quiere cambiar el tipo de evento, el default es cuando se presiona el click izq"""
     def set_event(self,event):
         self.event = event

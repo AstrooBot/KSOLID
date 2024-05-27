@@ -20,14 +20,11 @@ class screen4(Iscreen.screen):
     def display(self, event_list):    
 
         self.reset_events()
-        game_over_menu = Buttons.button(self.screen, (153,170,187), 1000, 400)
-        game_over_menu.shape(140,160)
-        font = pygame.font.Font(None, 70)
-        self.screen.blit(font.render(str(self.data), 1, 'white'), (430, 190))
+        self.set_title('¡Has llegado a la meta!')
 
         but_rei = buttons4(self.screen)
-        but_rei.shape(50,50)
-        but_rei.set_text('reintentar')
+        but_rei.shape(25,25)
+        but_rei.set_text('Reintentar')
         but_rei_event = self.isHappening(but_rei.isClicked(event_list), 'but_rei_event')
 
         but_restart = buttons4(self.screen)
@@ -45,7 +42,7 @@ class buttons4(Buttons.button):
     def __init__(self, screen):
         self.screen = screen
         self.color = Var_global.button_color
-        self.width = 170
+        self.width = 140
         self.height = 50
         super().__init__(self.screen, self.color, self.width, self.height)
         self.text_color = (255,255,255)
