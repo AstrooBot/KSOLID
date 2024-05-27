@@ -10,7 +10,6 @@ class screen1(Iscreen.screen):
         for i in self.expected_events:
             if i == 'but_start_event':
                 channel = 2
-                print(self.data)
         return channel
 
 

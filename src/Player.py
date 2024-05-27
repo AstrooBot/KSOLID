@@ -38,10 +38,12 @@ class player(Sprite):
                else: 
                      self.is_power_up()
                      self.amount_move = 1
-
+          if keys [ K_w] and 'up' in self.track_limits():
+                 print('I cannot go upper')
             
           if keys [K_s] and not 'down' in self.track_limits():
                self.rect.y += self.len_move
+
  
                if self.can_pass() == False:
                               self.rect.y -= self.len_move
@@ -51,6 +53,9 @@ class player(Sprite):
                else: 
                          self.is_power_up()
                          self.amount_move = 1
+
+          if keys [ K_s] and 'down' in self.track_limits():
+                 print('I cannot go down')
 
           if keys [K_a] and not 'left' in self.track_limits():
                self.rect.x -= self.len_move
@@ -64,6 +69,9 @@ class player(Sprite):
                          self.is_power_up()
                          self.amount_move = 1
 
+          if keys [ K_a] and 'left' in self.track_limits():
+                 print('I cannot go left')
+
           if keys [K_d] and not 'right' in self.track_limits():
                self.rect.x += self.len_move
                
@@ -75,6 +83,8 @@ class player(Sprite):
                else: 
                          self.is_power_up()
                          self.amount_move = 1
+          if keys [ K_d] and 'right' in self.track_limits():
+                 print('I cannot go right')
           self.box_moved = self.amount_move * Var_global.box_neutral_score_normal
 
 
@@ -98,12 +108,16 @@ class player(Sprite):
          check = []
          if self.rect.x - 5 <= 50 or self.rect.y - 5 + self.len_move  - 72 <= 50: 
               check.append('left')
+
          if self.rect.x + 60 + 5 >= 840 or self.rect.y + 65 + self.len_move - 72 >= 840 : 
                check.append('right')
+
          if self.rect.y - 5 <= 100 :
               check.append('up')
+
          if self.rect.y + 60 + 5 >= 674 or self.rect.y + 65 + self.len_move  - 72 >= 674 :
               check.append('down')
+ 
          return check
     
     def get_current_box(self):
@@ -143,6 +157,7 @@ class player(Sprite):
                          else:
                                self.set_image('sprite.png')
               case _ : 
+
                    check = False
          
          return check
