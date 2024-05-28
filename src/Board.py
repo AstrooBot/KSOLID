@@ -33,8 +33,6 @@ class board:
         self.clean_list(self.water_boxes)
         self.clean_list(self.speed_boxes)
         self.clean_list(self.special_boxes)
-      
-    
        
     def set_board(self, columnas, filas):
         self.clean_board()
@@ -57,14 +55,13 @@ class board:
         self.water_boxes = self.box_list_work[len(self.special_boxes) : len(self.special_boxes) + self.generate_percentage_boxes(20, 40)]
         self.set_type_loza(self.water_boxes, Var_global.box_water)
 
-        self.speed_boxes = self.box_list_work[ len(self.special_boxes) : len(self.special_boxes) + self.generate_percentage_boxes(2, 15)]
+        self.speed_boxes = self.box_list_work[ len(self.special_boxes) : len(self.special_boxes) + self.generate_percentage_boxes(10, 15)]
         self.set_type_loza(self.speed_boxes, Var_global.box_speed) 
         
         self.shape_board()
 
     def get_box(self, index):
         return self.box_list[index]
-        
 
 class Box(Buttons.button):
 

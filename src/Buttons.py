@@ -18,6 +18,13 @@ class button():
         self.text_font_type = None
         self.form = None
         self.rect = None
+        
+    def set_image(self, image):
+        self.image = pygame.image.load(image)
+        self.image_rect = self.image.get_rect()
+        self.image_rect.centerx = self.rect.centerx
+        self.image_rect.centery = self.rect.centery
+        self.screen.blit(self.image, self.image_rect)
 
         
     """Este metodo retorna dibujo del boton en la posicion x, y dadas"""
@@ -30,8 +37,6 @@ class button():
     """Este metodo, pensado para ser sobrecargado almacena lo que se desea que haga el boton cuando sea oprimido
        Para que el metodo funcione se debe agregar la siguiete linea al for que detecta los eventos:
                 if event.type == button.event """    
-
-
                 
     """Metodo para añadir texto dentro del boton"""
     def set_text(self, text):
@@ -47,7 +52,6 @@ class button():
     """Metodo extra por si se quiere cambiar el tipo de evento, el default es cuando se presiona el click izq"""
     def set_event(self,event):
         self.event = event
-    
 
     def isClicked(self, event_list):
         check = False

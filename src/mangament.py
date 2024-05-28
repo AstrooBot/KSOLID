@@ -8,7 +8,6 @@ class screen_mangament:
         self.current_Screen = None
         self.screens = []
 
-
     def set_screens(self, screens):
 
         for i in screens:
@@ -23,8 +22,6 @@ class screen_mangament:
                 self.screens[index_screen - 1].set_data(self.current_Screen.data)   
             self.current_Screen = self.screens[index_screen - 1]
                 
-    
-
     def get_current_screen(self):
         return self.current_Screen
     

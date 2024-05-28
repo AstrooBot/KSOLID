@@ -3,6 +3,7 @@ screen_height = 720
 button_color = (0,255,255)
 font_type = None
 font_size_title = 58
+font_size_labels = 48
 font_color_title = (255,255,255)
 box_neutral = (75, 255, 50)
 box_fire = (254, 90, 30)
@@ -19,3 +20,4 @@ box_special_score_easy = 2500
 box_neutral_score_pro = 1000
 box_neutral_score_normal = 500
 box_neutral_score_easy = 250
+

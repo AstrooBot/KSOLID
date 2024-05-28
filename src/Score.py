@@ -2,7 +2,6 @@ import Var_global, pygame
 class score:
     def __init__(self, screen, count) -> None:
         self.screen = screen
-
         self.count = count
         self.x = None
         self.y = None
@@ -20,6 +19,7 @@ class score:
 
         if event_list.type == pygame.KEYDOWN:
             self.count -= amount_move 
+
         return self.count 
     
 

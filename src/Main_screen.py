@@ -31,7 +31,6 @@ class main_screen:
 
          self.gestor.update(event_list)
 
-
      def running(self):
         pygame.init()
  
@@ -49,7 +48,6 @@ def main():
 
     screen = main_screen()
     screen.running()    
-
 
 if __name__ == '__main__' : 
     main()

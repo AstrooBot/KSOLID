@@ -1,9 +1,7 @@
 import pygame, Var_global
 
-
 class screen :
 
-    
     def __init__(self, screen):
 
         self.caption = "KSOLID Game"
@@ -18,12 +16,10 @@ class screen :
     def set_caption(self):
         pygame.display.set_caption(self.caption)
     
-
     def set_title(self,text):
     
         title = self.font.render(text, 1, Var_global.font_color_title) 
         self.screen.blit(title,(Var_global.screen_width/3, Var_global.screen_height/8))   
-
   
     def set_background_image(self):
         self.background_image = pygame.image.load(self._image).convert()
@@ -51,3 +47,8 @@ class screen :
     
     def get_data(self):
         return self.data
+    
+    def set_text(self, x, y, text):
+        ctext = self.font.render(text, 1, Var_global.font_color_title)
+        self.screen.blit(ctext, (x, y))
+        return ctext

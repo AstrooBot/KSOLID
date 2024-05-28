@@ -15,6 +15,7 @@ class player(Sprite):
          self.len_move = 72
          self.amount_move = 0
          self.box_moved = 0
+         self.moves = 0
          super().__init__()
     
     def set_image(self, image_addr):
@@ -24,8 +25,8 @@ class player(Sprite):
     def update(self, event_list):
 
         if event_list.type == pygame.KEYDOWN:
+          sumar = True
           keys = pygame.key.get_pressed()
-     
           if keys [K_w] and not 'up' in self.track_limits():
   
                self.rect.y -= self.len_move
@@ -38,12 +39,15 @@ class player(Sprite):
                else: 
                      self.is_power_up()
                      self.amount_move = 1
-          if keys [ K_w] and 'up' in self.track_limits():
-                 print('I cannot go upper')
-            
-          if keys [K_s] and not 'down' in self.track_limits():
-               self.rect.y += self.len_move
+                     self.moves += 1
 
+          elif keys [ K_w] and 'up' in self.track_limits():
+               print('I cannot go up')
+               self.len_move = 72 
+               self.set_image('sprite.png')
+            
+          elif keys [K_s] and not 'down' in self.track_limits():
+               self.rect.y += self.len_move
  
                if self.can_pass() == False:
                               self.rect.y -= self.len_move
@@ -53,11 +57,14 @@ class player(Sprite):
                else: 
                          self.is_power_up()
                          self.amount_move = 1
+                         self.moves += 1
 
-          if keys [ K_s] and 'down' in self.track_limits():
-                 print('I cannot go down')
+          elif keys [ K_s] and 'down' in self.track_limits():
+               print('I cannot go down')
+               self.len_move = 72 
+               self.set_image('sprite.png')
 
-          if keys [K_a] and not 'left' in self.track_limits():
+          elif keys [K_a] and not 'left' in self.track_limits():
                self.rect.x -= self.len_move
 
                if self.can_pass() == False:
@@ -68,11 +75,14 @@ class player(Sprite):
                else: 
                          self.is_power_up()
                          self.amount_move = 1
+                         self.moves += 1
 
-          if keys [ K_a] and 'left' in self.track_limits():
-                 print('I cannot go left')
+          elif keys [ K_a] and 'left' in self.track_limits():
+               print('I cannot go left')
+               self.len_move = 72 
+               self.set_image('sprite.png')
 
-          if keys [K_d] and not 'right' in self.track_limits():
+          elif keys [K_d] and not 'right' in self.track_limits():
                self.rect.x += self.len_move
                
                if self.can_pass() == False:
@@ -83,12 +93,17 @@ class player(Sprite):
                else: 
                          self.is_power_up()
                          self.amount_move = 1
-          if keys [ K_d] and 'right' in self.track_limits():
-                 print('I cannot go right')
-          self.box_moved = self.amount_move * Var_global.box_neutral_score_normal
+                         self.moves += 1
+          elif keys [ K_d] and 'right' in self.track_limits():
+               print('I cannot go right')
+               self.len_move = 72 
+               self.set_image('sprite.png')
 
+          else: 
+                sumar = False
+          self.box_moved = sumar * self.amount_move * Var_global.box_neutral_score_normal        
 
-          if keys [K_o]:
+          """elif keys [K_o]:
                print(self.len_move)
                print(self.rect.y)
                #for i in self.track_limits(): 
@@ -102,7 +117,7 @@ class player(Sprite):
                #print(self.imagen)
                #print(self.image_addr)
                #print(self.can_pass())
-               print(self.box_moved)
+               print(self.box_moved)"""
              
     def track_limits(self):
          check = []
@@ -132,6 +147,7 @@ class player(Sprite):
          if self.get_current_box() == None:
                    check = False
                    print('I cannot go any futher')
+
          else:                 
             match self.get_current_box().color:
               
@@ -172,15 +188,13 @@ class player(Sprite):
                                    self.len_move += 72
                                    self.set_image('kirby_fast.png')
 
-
                     case Var_global.box_neutral:
 
                                    if self.len_move > 72: 
                                         self.set_image('kirby_fast.png')
                                    else:
                                         self.set_image('sprite.png')
-                                   
-                    
+                                            
 def main():
     screen = pygame.display.set_mode(size=(1280,720))
     voard = Board.board(screen)
@@ -199,7 +213,6 @@ def main():
                     sys.exit()
             if event.type == pygame.KEYDOWN:
                 kirby.update()
-        
         
         pygame.display.update()
 
