@@ -1,42 +1,73 @@
-"""import tkinter
+import tkinter
+from PIL import ImageTk, Image
+class how_to_play():
+    def __init__(self, width, heigth) :
 
-frame = tkinter.Tk()
+        self.script = []
+        self.labels = []
+        self.font_type = 'monospace'
+        self.font_title_size = '15'
+        self.font_body_size = '10'
+        self.width = width
+        self.height = heigth
+        self.size = str(width) + 'x' + str(heigth)
+        self.frame = tkinter.Tk()
+        self.frame.geometry(self.size)
 
-frame.geometry('500x720')
+    def convert(self):
 
-var = '¿Cómo jugar KSOLID?'
-var2 = 'KSOLID es un juego de estrategia en el que debes llegar a la meta con la menor cantidad de movimientos y poderes posibles.' 
+        for string in self.script:
 
-label = tkinter.Label(frame, text = var, font = ('monospace', 15) )
-label2 = tkinter.Label(frame, text= var2, font= ('monospace', 10))
-label.pack()
-label2.pack()
-frame.mainloop()"""
-import tkinter as tk
+            if string[0] == 'T' :
+                self.set_title(string[1:])
+            
+            elif string[0] == 'I' :
+                self.set_image(string[1:])
+            
+            elif string[0] == 'B' :
+                self.set_body(string[1:])
+            
+            else: 
+                self.set_body(string)
 
-def ajustar_label():
-    texto = entry_texto.get()
-    label_texto.config(text=texto)
 
-# Configuración de la ventana principal
-root = tk.Tk()
-root.title("Texto ajustable")
 
-# Configuración del frame
-frame = tk.Frame(root, width=200, height=100)
-frame.pack()
 
-# Entrada de texto
-entry_texto = tk.Entry(root)
-entry_texto.pack()
+ 
+    
+    def set_title(self, text):
 
-# Botón para ajustar el texto
-boton_ajustar = tk.Button(root, text="Ajustar texto", command=ajustar_label)
-boton_ajustar.pack()
+        label = tkinter.Label(self.frame, wraplength= self.width,font = (self.font_type, self.font_title_size))
+        label.config(text = text)
+        self.labels.append(label)
+    
+    def set_body(self, text):
 
-# Label para mostrar el texto
-label_texto = tk.Label(frame, wraplength=190)  # 190 para dejar un poco de margen
-label_texto.pack()
-def main():
-    root.mainloop()
+        label = tkinter.Label(self.frame, wraplength= self.width,font = (self.font_type, self.font_body_size))
+        label.config(text = text)
+        self.labels.append(label)
+    
+    def set_image(self, image_addr, width, height):
+
+        image = Image.open(image_addr)
+        image = image.resize(width, height)
+        image_to_pack = ImageTk.PhotoImage(image)
+        label_image = tkinter.Label(self.frame, image = image_to_pack)
+        self.labels.append(label_image)
+    
+    def pack_everything(self):
+        
+        for element in self.labels :
+            element.pack()
+    
+    def display(self):
+        self.frame.mainloop()
+        
+
+frame = how_to_play(500, 700)
+frame.script = ['Thola']
+frame.convert()
+frame.pack_everything()
+frame.display()
+
 
