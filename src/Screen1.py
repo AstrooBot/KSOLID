@@ -1,4 +1,4 @@
-import pygame, Buttons, Var_global , Iscreen
+import pygame, Buttons, Var_global , Iscreen, How_to_play
 
 class screen1(Iscreen.screen): 
     def __init__(self,screen):
@@ -10,6 +10,9 @@ class screen1(Iscreen.screen):
         for i in self.expected_events:
             if i == 'but_start_event':
                 channel = 2
+            
+            if i == 'but_es_event' :
+                How_to_play.main()
         return channel
 
 
@@ -27,8 +30,9 @@ class screen1(Iscreen.screen):
         but_es.set_text('Como jugar')
 
         but_start_event = self.isHappening(but_start.isClicked(event_list), 'but_start_event')
+        but_es_event = self.isHappening(but_es.isClicked(event_list), 'but_es_event')
         self.expected_events.append(but_start_event)
-
+        self.expected_events.append(but_es_event)
 
 class buttons1(Buttons.button):
 

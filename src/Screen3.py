@@ -41,12 +41,13 @@ class screen3(Iscreen.screen):
         self.screen.blit(self.player.imagen, self.player.rect)
         self.screen.blit(self.flag.image, self.flag.rect)
 
-        but_map = buttons3(self.screen, 170, 50)
-        but_map.shape(1000, Var_global.screen_height/2)
-        but_map.set_text('Mapa')
+        but_map = buttons3(self.screen, 250, 50)
+        but_map.shape(920, Var_global.screen_height/2)
+        but_map.set_text('Generar nuevo Mapa')
         but_map_event = self.isHappening(but_map.isClicked(event_list), 'but_map_event')
 
         but_water_object = buttons3(self.screen, 70, 70)
+        but_water_object.color = Var_global.box_water
         but_water_object.shape(1000,450)
         but_water_object.set_image('kirby_water.png')
         but_water_object_event = self.isHappening(but_water_object.isClicked(event_list), 'but_water_object_event')
