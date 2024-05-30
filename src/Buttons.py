@@ -20,7 +20,7 @@ class button():
         self.rect = None
         
     def set_image(self, image):
-        self.image = pygame.image.load(image)
+        self.image = pygame.image.load(str('../images/' + image))
         self.image_rect = self.image.get_rect()
         self.image_rect.centerx = self.rect.centerx
         self.image_rect.centery = self.rect.centery

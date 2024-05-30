@@ -57,7 +57,7 @@ class how_to_play():
         label.pack()
 
     def set_image(self, image_addr, width, height):
-        image = Image.open(image_addr)
+        image = Image.open(str('../images/'+image_addr))
         image = image.resize((width, height))
         image_to_pack = ImageTk.PhotoImage(image)
         self.images_to_pack.append(image_to_pack)

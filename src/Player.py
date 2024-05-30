@@ -7,7 +7,7 @@ class player(Sprite):
          
          self.contenedor = screen
          self.board = board
-         self.image_addr = 'sprite.png'
+         self.image_addr = '../images/sprite.png'
          self.imagen = pygame.image.load(self.image_addr)
          self.rect = self.imagen.get_rect()
          self.rect.centerx = 50 + 35
@@ -19,7 +19,7 @@ class player(Sprite):
          super().__init__()
     
     def set_image(self, image_addr):
-         self.image_addr = image_addr
+         self.image_addr = str('../images/'+image_addr)
          self.imagen = pygame.image.load(self.image_addr)
 
     def update(self, event_list):
@@ -102,22 +102,6 @@ class player(Sprite):
           else: 
                 sumar = False
           self.box_moved = sumar * self.amount_move * Var_global.box_neutral_score_normal        
-
-          """elif keys [K_o]:
-               print(self.len_move)
-               print(self.rect.y)
-               #for i in self.track_limits(): 
-                    #print(i)
-               #print(self.track_limits())     
-               #print(self.rect.x, self.rect.y)
-               print(self.get_current_box())
-               #print(self.get_current_box())     
-               #print(self.rect.centerx, self.rect.centery)
-               #print(self.get_current_box().color)
-               #print(self.imagen)
-               #print(self.image_addr)
-               #print(self.can_pass())
-               print(self.box_moved)"""
              
     def track_limits(self):
          check = []
@@ -153,13 +137,13 @@ class player(Sprite):
               
               case Var_global.box_fire:
                    
-                    if self.image_addr != 'kirby_fire.png' and self.image_addr != 'kirby_fire_fast.png':
+                    if self.image_addr != '../images/kirby_fire.png' and self.image_addr != '../images/kirby_fire_fast.png':
                          check = False
                          print('I cannot pass, there is fire')
 
               case Var_global.box_water:
                     
-                    if self.image_addr != 'kirby_water.png' and self.image_addr != 'kirby_water&fast.png':
+                    if self.image_addr != '../images/kirby_water.png' and self.image_addr != '../images/kirby_water&fast.png':
                          check = False
                          print('I cannot pass, there is water')
 

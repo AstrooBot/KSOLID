@@ -3,7 +3,7 @@ class objects:
     def __init__(self, screen, board, image):
         self.surface = screen
         self.board = board
-        self.image = pygame.image.load(image)
+        self.image = pygame.image.load(str('../images/' + image))
         self.rect = self.image.get_rect()
     
     def set_object(self, x, y):

@@ -1,4 +1,4 @@
-import pygame, sys, mangament, Var_global, Screen1, Screen3, Screen4
+import pygame, sys, mangament, Var_global, Screen1, Screen3, Screen4, tkinter
 
 """La siguiente clase almacena la superficie en la que se trabajara todas las pantallas. Es como si main_screen fuera una hoja en blanco
 y cada pantalla, una impresion que puede ponerse sobre la hoja. Cada pantalla trabaja sobre las medidas globales pero todas sus solicitudes se
@@ -45,7 +45,6 @@ class main_screen:
 
 def main():
     pygame.init()
-
     screen = main_screen()
     screen.running()    
 

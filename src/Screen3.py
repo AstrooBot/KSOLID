@@ -101,7 +101,7 @@ class screen3(Iscreen.screen):
                 self.restart() 
                 self.map_bool = True      
             if i == 'but_water_object_event':
-                if self.player.image_addr == 'kirby_fast.png' or self.player.image_addr == 'kirby_fire_fast.png':
+                if self.player.image_addr == '../images/kirby_fast.png' or self.player.image_addr == '../images/kirby_fire_fast.png':
                     self.player.set_image('kirby_water&fast.png')
                 else: 
                     self.player.set_image('kirby_water.png')
@@ -109,7 +109,7 @@ class screen3(Iscreen.screen):
                 self.score_count -= Var_global.box_special_score_normal
 
             if i == 'but_fire_object_event' :
-                if self.player.image_addr == 'kirby_fast.png' or self.player.image_addr == 'kirby_water&fast.png':
+                if self.player.image_addr == '../images/kirby_fast.png' or self.player.image_addr == '../images/kirby_water&fast.png':
                     self.player.set_image('kirby_fire_fast.png')
                 else: 
                     self.player.set_image('kirby_fire.png')

@@ -1,4 +1,4 @@
-import pygame, Buttons
+import pygame
 from pygame.locals import *
 """Este codigo se enfoca en ser el gestor de pantalla. le indica a la pantalla principal que y cuando debe dibujar"""
 """Este codigo se ha vuelto el kernel de KSOLID"""
