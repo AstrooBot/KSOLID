@@ -4,17 +4,15 @@ class screen1(Iscreen.screen):
     def __init__(self,screen):
         super().__init__(screen)
 
-    
     def but_action(self):
         channel = 0
         for i in self.expected_events:
             if i == 'but_start_event':
                 channel = 2
-            
-            if i == 'but_es_event' :
-                How_to_play.main()
+            if i == 'but_es_event':
+                How_to_play.frame_display()
+          
         return channel
-
 
     def display(self, event_list):    
 
@@ -30,7 +28,8 @@ class screen1(Iscreen.screen):
         but_es.set_text('Como jugar')
 
         but_start_event = self.isHappening(but_start.isClicked(event_list), 'but_start_event')
-        but_es_event = self.isHappening(but_es.isClicked(event_list), 'but_es_event')
+        but_es_event = self.isHappening(but_es.isClicked(event_list), 'but_es_event' )
+
         self.expected_events.append(but_start_event)
         self.expected_events.append(but_es_event)
 

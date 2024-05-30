@@ -1,1 +1,0 @@
-"""Objective: storage different languagues for the game"""

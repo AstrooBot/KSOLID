@@ -8,13 +8,8 @@ class screen4(Iscreen.screen):
 
     def set_high_score(self, new_score):
 
-        if  new_score != None:
-            if self.score == None:
-                self.score == new_score
-            elif new_score > self.score:
-                self.high_score = new_score
-        if self.high_score == None or self.data[4] == True:
-            self.high_score = self.score
+        if self.high_score == None or self.high_score < new_score:
+            self.high_score = new_score
             
     def but_action(self):
         channel = 0
@@ -87,8 +82,9 @@ class screen4(Iscreen.screen):
         self.expected_events.append(but_rei_event)
         self.expected_events.append(but_restart_event)
 
-        self.set_high_score(self.data[0])
         self.score = self.data[0] 
+        self.set_high_score(self.score)
+
 
 class buttons4(Buttons.button):
 
