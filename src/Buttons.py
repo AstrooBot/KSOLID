@@ -18,6 +18,7 @@ class button():
         self.text_font_type = None
         self.form = None
         self.rect = None
+        self.image = None
         
     def set_image(self, image):
         self.image = pygame.image.load(str('../images/' + image))

@@ -145,7 +145,7 @@ class buttons3(Buttons.button):
         self.text_color = (255,255,255)
         self.text_font_type = Var_global.font_type
         self.text_size = 35
-        self.image = None
+
         
 
 

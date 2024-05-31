@@ -1,4 +1,4 @@
-import pygame, sys, Board, Var_global
+import pygame, Var_global
 from pygame.locals import *
 from pygame.sprite import  Sprite
 
@@ -178,26 +178,5 @@ class player(Sprite):
                                         self.set_image('kirby_fast.png')
                                    else:
                                         self.set_image('sprite.png')
-                                            
-def main():
-    screen = pygame.display.set_mode(size=(1280,720))
-    voard = Board.board(screen)
-    voard.set_board(11,8)
-    kirby = player(screen, voard)
-    
-    pygame.init()
-
-    while 1:
-        screen.fill('black')
-        voard.shape_board()
-       
-        screen.blit(kirby.imagen, kirby.rect)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                    sys.exit()
-            if event.type == pygame.KEYDOWN:
-                kirby.update()
-        
-        pygame.display.update()
 
 

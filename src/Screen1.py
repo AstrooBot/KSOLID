@@ -1,4 +1,4 @@
-import pygame, Buttons, Var_global , Iscreen, How_to_play
+import Buttons, Var_global , Iscreen, How_to_play
 
 class screen1(Iscreen.screen): 
     def __init__(self,screen):

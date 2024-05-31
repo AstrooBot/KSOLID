@@ -1,0 +1,217 @@
+@startuml Main 
+
+class "Screen" as Sc 
+class "Buttons" as Bt 
+class "Board" as Bd 
+class "Player" as Pl 
+class "Management" as Mn 
+class "Objects" as Ob 
+class "Score" as Sr 
+class "Screen_1" as Sc1 
+class "Screen_3" as Sc3 
+class "Screen_4" as Sc4 
+class "Main_screen" as Msc 
+class "How_to_play" as Hw 
+class "Box" as Bx
+class "Buttons1" as Bt1
+
+Sc : caption : string 
+Sc : image : Null
+Sc : caption : str
+Sc : screen : screen
+Sc : font : pygame.font
+Sc : expected_events : list
+Sc : data : Null
+Sc : score : int
+Sc : score_count : int
+Sc : high_score : int
+Sc : player : player
+Sc : board : board
+Sc : info = list
+Sc : map_bool : bool
+Sc : move = int
+Sc : flag = object
+Sc : water_counter = int
+Sc : fire_counter = int
+Sc : set_title(text : string)
+Sc : reset_events()
+Sc : isHappening(bool, event_name : string)   
+Sc : but_action():   
+Sc : set_data(data)   
+Sc : get_data()   
+Sc : set_text(x : int , y : int, text : string)   
+Sc : display()
+
+
+Bt : screen : screen
+Bt : event : event
+Bt : color : color
+Bt : width : int
+Bt : height : int
+Bt : x : int
+Bt : y : int
+Bt : text_color : string
+Bt : text_size : int
+Bt : text_font_type : string
+Bt : form : form
+Bt : rect : rect
+Bt : image : image
+Bt : set_image(image)
+Bt : shape(int x, int y)
+Bt : set_text(text : string)
+Bt : set_event(event)
+Bt : isClicked(self , event_list : list)
+
+Bx <|- Bt
+Bd *-- Bx
+Bx : screen : screen
+Bx : color : color
+Bx : width : int
+Bx : height : int
+
+
+
+Bd : screen : screen
+Bd : box_list : list
+Bd : box_list_work : list
+Bd : fire_boxes : list
+Bd : water_boxes : list
+Bd : speed_boxes : list
+Bd : special_boxes : list   
+Bd : shape_board()
+Bd : set_type_loza(color: color) 
+Bd : generate_percentage_boxes(percentage_min : int, percentage_max : int )
+Bd : clean_list(list : list)
+Bd : clean_board()      
+Bd : set_board(column : int , files : int )
+Bd : get_box(index : int)
+Bd *-- Bx
+Bx *-- Bd
+
+        
+Pl : screen : screen
+Pl : board : board
+Pl : image_addr : string
+Pl : rect : rect
+Pl : len_move : int
+Pl : amount_move : int
+Pl : box_moved : int
+Pl : moves : int 
+Pl : set_image(image_addr : string)
+Pl : update(event_list : event_list)             
+Pl : track_limits() 
+Pl : get_current_box()
+Pl : can_pass()   
+Pl : is_power_up()
+
+  
+Mn : current_Screen : Screen
+Mn : screens : list
+Mn : set_screens(screens : list of screen)       
+Mn : set_current_screen(index_screen : int)               
+Mn : get_current_screen()    
+Mn : update(event_list : event_list)
+
+
+Ob : surface : screen
+Ob : board : board
+Ob : image : image
+Ob : rect : rect
+Ob : set_object(x : int, y : int)
+Ob : detect_collissions(object : object)
+
+Sr *-- Sc4
+Sr : screen : screen
+Sr : count : int
+Sr : x : int
+Sr : y : int
+Sr : font_type : string
+Sr : font_size : int
+Sr : font : pygame.font
+Sr : text : string
+Sr : set_counter(x : int , y : int)
+Sr : update(event_list : event_list, amount_move : int)
+
+
+Hw : script : list
+Hw : labels : list
+Hw : images_to_pack : list
+Hw : font_type : string
+Hw : font_title_size : string
+Hw : font_body_size : string
+Hw : width : int
+Hw : height : int
+Hw : size : string
+Hw : frame : tkinter.Tk()
+Hw : img_width : int
+Hw : img_height : int
+Hw : img_width1 : int
+Hw : img_height1 : int
+Hw : canvas : tkinter.Canvas()
+Hw : scrollbar : tkinter.Scrollbar()
+Hw : inner_frame : tkinter.Frame
+Hw : convert()
+Hw : set_title(text : string)
+Hw : set_body(text : string)
+Hw : set_image(image_addr : int, width : int, height : int)
+Hw : display()
+Hw : frame_display()
+
+
+Sc1 : display(event_list : event_list)
+Sc1 : but_action()
+Sc1 *-- Bt1
+Bt1 <|- Bt
+Sc1 <|- Sc 
+Bt1 *-- Sc1
+
+  
+Sc3 : display(event_list : event_list)
+Sc3 : restart()
+Sc3 : but_action()
+Sc3 <|- Sc
+Sc3 *-- Bd
+Sc3 *-- Ob
+Sc3 *-- Pl
+Ob *-- Sc3
+Ob *-- Sc3
+Pl *-- Sc3 
+Pl *-- Sc3
+Bd *-- Sc3
+Sc3 *-- Buttons3
+Buttons3 <|- Bt
+Buttons3 *-- Sc3
+
+Sc4 <|- Sc
+Sc4 *-- Sr
+Sc4 *-- Buttons4
+Buttons4 <|- Bt
+Buttons4 *-- Sc4
+Sc4 : set_high_score(new_score : int)        
+Sc4 : but_action()
+Sc4 : display(event_list : event_list)  
+
+Mn o-- Sc1 
+Mn o-- Sc3
+Mn o-- Sc4
+Sc1 *-- Mn 
+Sc3 *-- Mn
+Sc4 *-- Mn
+
+Mn *-- Msc
+Msc *-- Mn
+Sc1 *-- Hw
+Msc : surface : pygame.display
+Msc : manager : Management 
+Msc : screens : list of screen   
+Msc : update()
+Msc : running()
+Msc : main()
+
+
+
+
+
+
+
+        
