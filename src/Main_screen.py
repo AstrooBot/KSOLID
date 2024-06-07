@@ -33,8 +33,10 @@ class main_screen:
 
      def running(self):
         pygame.init()
- 
+        fps = 60
+        clock = pygame.time.Clock()
         while 1:
+            clock.tick(60)
             event_list = pygame.event.get()
             for event in event_list:
                 self.update(event)
