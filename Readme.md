@@ -1,8 +1,10 @@
 **KSOLID**
--KSOLID es un juego de estrategia en el que debes llegar a la meta con la menor cantidad de movimientos y poderes posibles. Basado en la libreria pygame.
+
+KSOLID es un juego de estrategia en el que debes llegar a la meta con la menor cantidad de movimientos y poderes posibles. Basado en la libreria pygame.
 
 **Requerimientos**
--KSOLID requiere de los siguientes pluggins para funcionar correctacmente:
+
+KSOLID requiere de los siguientes pluggins para funcionar correctacmente:
 
   - pygame
   - Pillow
