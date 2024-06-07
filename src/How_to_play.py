@@ -45,6 +45,7 @@ class how_to_play():
                 case _:
                     self.set_body(string)
                     print('Error at: ' + str(index) + string)
+        self.update_scroll_region()
 
     def set_title(self, text):
         label = tkinter.Label(self.inner_frame, wraplength=self.width, font=(self.font_type, self.font_title_size))
@@ -67,8 +68,13 @@ class how_to_play():
     def display(self):
         self.frame.mainloop()
 
+    def update_scroll_region(self):
+        self.inner_frame.update_idletasks()  # Update the inner frame
+        self.canvas.config(scrollregion=self.canvas.bbox("all"))  # Update the canvas region
+
 def frame_display():
     frame = how_to_play(500, 720)
     frame.script = Var_global.how_to_play_script
     frame.convert()
     frame.display()
+

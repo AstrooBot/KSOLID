@@ -2,9 +2,9 @@ import Buttons, Var_global , Iscreen
 
 class screen4(Iscreen.screen): 
     def __init__(self,screen):
+        super().__init__(screen)
         self.score = None
         self.high_score = None
-        super().__init__(screen)
 
     def set_high_score(self, new_score):
 

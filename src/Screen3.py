@@ -2,6 +2,8 @@ import Buttons, Var_global , Iscreen, Board, Player, Objects, Score
 
 class screen3(Iscreen.screen): 
     def __init__(self,screen):
+
+        super().__init__(screen)
         self.board = Board.board(screen)
         self.board.set_board(11,8)
         self.player = Player.player(screen, self.board)
@@ -14,7 +16,7 @@ class screen3(Iscreen.screen):
         self.moves = 1
         self.map_bool = False
 
-        super().__init__(screen)
+
     
     def display(self, event_list):
 

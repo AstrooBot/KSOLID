@@ -1,7 +1,7 @@
 import sys, pygame, Buttons, Var_global, random
 
 class board:
-    def __init__(self, screen) -> None:
+    def __init__(self, screen) :
         self.screen = screen
         self.box_list = []
         self.box_list_work = []

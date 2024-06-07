@@ -63,7 +63,6 @@ Bt : set_event(event)
 Bt : isClicked(self , event_list : list)
 
 Bx <|- Bt
-Bd *-- Bx
 Bx : screen : screen
 Bx : color : color
 Bx : width : int
@@ -85,8 +84,8 @@ Bd : clean_list(list : list)
 Bd : clean_board()      
 Bd : set_board(column : int , files : int )
 Bd : get_box(index : int)
-Bd *-- Bx
-Bx *-- Bd
+Bd *-- Bx : box
+Bx *-- Bd : screen
 
         
 Pl : screen : screen
@@ -120,7 +119,7 @@ Ob : rect : rect
 Ob : set_object(x : int, y : int)
 Ob : detect_collissions(object : object)
 
-Sr *-- Sc4
+Sr *-- Sc4 : screen
 Sr : screen : screen
 Sr : count : int
 Sr : x : int
@@ -160,47 +159,46 @@ Hw : frame_display()
 
 Sc1 : display(event_list : event_list)
 Sc1 : but_action()
-Sc1 *-- Bt1
+Sc1 *-- Bt1 : buttons1
 Bt1 <|- Bt
 Sc1 <|- Sc 
-Bt1 *-- Sc1
+Bt1 *-- Sc1 : screen
 
   
 Sc3 : display(event_list : event_list)
 Sc3 : restart()
 Sc3 : but_action()
 Sc3 <|- Sc
-Sc3 *-- Bd
-Sc3 *-- Ob
-Sc3 *-- Pl
-Ob *-- Sc3
-Ob *-- Sc3
-Pl *-- Sc3 
-Pl *-- Sc3
-Bd *-- Sc3
-Sc3 *-- Buttons3
+Sc3 *-- Bd : board
+Sc3 *-- Ob : object
+Sc3 *-- Pl : player
+Ob *-- Sc3 : screen
+Ob *-- Sc3 : screen
+Pl *-- Sc3 : screen, board
+Bd *-- Sc3 : screen
+Sc3 *-- Buttons3 : buttons3
 Buttons3 <|- Bt
-Buttons3 *-- Sc3
+Buttons3 *-- Sc3 : screen
 
 Sc4 <|- Sc
-Sc4 *-- Sr
-Sc4 *-- Buttons4
+Sc4 *-- Sr : score
+Sc4 *-- Buttons4 : buttons4
 Buttons4 <|- Bt
 Buttons4 *-- Sc4
 Sc4 : set_high_score(new_score : int)        
 Sc4 : but_action()
 Sc4 : display(event_list : event_list)  
 
-Mn o-- Sc1 
-Mn o-- Sc3
-Mn o-- Sc4
-Sc1 *-- Mn 
-Sc3 *-- Mn
-Sc4 *-- Mn
+Mn o-- Sc1 : screen1
+Mn o-- Sc3 : screen3
+Mn o-- Sc4 : screen4
+Sc1 *-- Mn : event_list
+Sc3 *-- Mn : event_list
+Sc4 *-- Mn : event_list
 
-Mn *-- Msc
-Msc *-- Mn
-Sc1 *-- Hw
+Mn *-- Msc : surface
+Msc *-- Mn : management
+Sc1 *-- Hw : how_to_play
 Msc : surface : pygame.display
 Msc : manager : Management 
 Msc : screens : list of screen   
